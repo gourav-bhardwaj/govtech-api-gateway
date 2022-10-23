@@ -62,7 +62,7 @@ pipeline {
         }
       }
     }
-    stage("Docker build & push") {
+    /*stage("Docker build & push") {
       steps {
         script {
           withDockerRegistry(credentialsId: "${DOCKER_CREDENTIALS_ID}", url: '') {
@@ -71,7 +71,7 @@ pipeline {
 	      }
         }
       }
-    }
+    }*/
     stage("Helm Deploy") {
       steps {
         script {
