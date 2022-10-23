@@ -79,6 +79,11 @@ pipeline {
           withCredentials([file(credentialsId: "${KUBE_CREDENTIAL_ID}", variable: 'KUBECONFIG_CONTENT')]) {
             sh "pwd"
             sh "ls -ltr"
+            sh 'wget https://get.helm.sh/helm-v3.6.1-linux-amd64.tar.gz'
+            sh 'ls -a'
+            sh 'tar -xvzf helm-v3.6.1-linux-amd64.tar.gz'
+            sh 'sudo cp linux-amd64/helm /usr/bin'
+            sh 'helm version'
             //sh "helm upgrade --install --namespace ${NAMESPACE} ${jobName} helm-chart/spring-boot -f values/${HELM_FILENAME}.yaml --set image.tag=${BUILD_TIMESTAMP}.${version}.${BRANCH_NAME} --kubeconfig ${KUBECONFIG_CONTENT} --kube-context ${KUBE_CONTEXT} --debug --atomic"
             sh "helm upgrade --install --namespace ${NAMESPACE} ${jobName} helm-chart/spring-boot -f values/${HELM_FILENAME}.yaml --set image.tag=v1 --kubeconfig $KUBECONFIG_CONTENT --kube-context ${KUBE_CONTEXT} --debug --atomic"
 	  }
