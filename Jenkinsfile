@@ -26,7 +26,7 @@ pipeline {
            checkout scm
            sh 'mkdir -p helm-chart'
            dir('helm-chart') {
-             git url: "", branch: 'master', credentialsId: ''
+             git url: "https://github.com/gourav-bhardwaj/govtech-helm-chart-app.git", branch: 'dev', credentialsId: ''
            }
        }
     }
