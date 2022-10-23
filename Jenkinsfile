@@ -18,6 +18,7 @@ pipeline {
   agent any
   tools {
     gradle 'mygradle'
+    docker 'mydocker'
   }
   stages {
     stage("GIT") {
