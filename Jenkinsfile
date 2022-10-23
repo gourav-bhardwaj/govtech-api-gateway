@@ -58,7 +58,7 @@ pipeline {
     stage("Package and Build") {
       steps {
         script {
-          sh "gradle clean build"
+          sh "gradle clean build -x test"
         }
       }
     }
