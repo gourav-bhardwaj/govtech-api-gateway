@@ -39,7 +39,7 @@ pipeline {
            echo "COMMIT ID is $COMMIT"
            sh 'git name-rev --name-only HEAD > GIT_BRANCH'
            sh 'cat GIT_BRANCH | cut -f3 -d "/" > test'
-           BRANCH_NAME = readFile('.git/commit').trim()
+           BRANCH_NAME = readFile('test').trim()
            NAMESPACE = ""
            CHANNEL = ""
            KUBE_CONTEXT = ""
@@ -49,7 +49,7 @@ pipeline {
 		        CHANNEL = "dev"
 		        KUBE_CONTEXT = "k8s-master"
 		        KUBE_CREDENTIAL_ID = "GOVTECH_KUBE_CRED"
-		        NEW_BRANCH_NAME = readFile('.git/commit').trim()
+		        NEW_BRANCH_NAME = readFile('test').trim()
 		        echo "********This is $NEW_BRANCH_NAME**************"
            } 
          }
