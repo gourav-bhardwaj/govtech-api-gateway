@@ -10,7 +10,7 @@ String application = "${jobName}"
 String branchName = "${env.BRANCH_NAME}"
 String HELM_FILENAME = "deploy-${branchName}"
 
-//Docker config env
+//Docker config env ----
 String DOCKER_REGISTRY = "govtech-api-gateway"
 String DOCKER_CREDENTIALS_ID = "USER_DOCKER_CREDENTIALS_ID"
 
