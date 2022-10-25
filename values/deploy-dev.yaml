@@ -90,20 +90,6 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
-env:
-  - name: key
-    value: value1
-  - name: username
-    valueFrom:
-      configMapKeyRef:
-        key: myuser
-        name: govconfig
-  - name: password
-    valueFrom:
-      secretKeyRef:
-        key: pass
-        name: govsecret
-
 nodeSelector: {}
 
 tolerations: []
