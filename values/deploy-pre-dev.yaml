@@ -6,7 +6,7 @@
 application:
   hasEnv: false
   name: govtech-api-gateway
-  namespace: gv-tech
+  namespace: gov-tech-pre-dev
   replicaCount: 1
   healthCheck:
     enable: true
