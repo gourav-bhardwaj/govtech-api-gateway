@@ -51,7 +51,14 @@ pipeline {
 		        KUBE_CREDENTIAL_ID = "GOVTECH_KUBE_CRED"
 		        NEW_BRANCH_NAME = readFile('test').trim()
 		        echo "********This is $NEW_BRANCH_NAME**************"
-           } 
+	   } else if (BRANCH_NAME == 'pre-dev') {
+           		NAMESPACE = "gov-tech-pre-dev"
+		        CHANNEL = "pre-dev"
+		        KUBE_CONTEXT = "kubernetes-admin@kubernetes"
+		        KUBE_CREDENTIAL_ID = "GOVTECH_KUBE_CRED"
+		        NEW_BRANCH_NAME = readFile('test').trim()
+		        echo "********This is $NEW_BRANCH_NAME**************"
+	   }
          }
        }
     }
