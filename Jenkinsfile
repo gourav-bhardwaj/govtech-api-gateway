@@ -65,7 +65,10 @@ pipeline {
     stage("Docker build & push") {
       steps {
         script {
-          withDockerRegistry(credentialsId: "${DOCKER_CREDENTIALS_ID}", url: "https://index.docker.io") {
+          withCredentials([
+			usernamePassword(credentialsId: 'DOCKER_CREDENTIALS_ID', usernameVariable: 'USER', passwordVariable: 'PWD')
+			]) {
+		  sh "docker login -u $USER -p $PWD"
 	        sh "docker build -t ${DOCKER_REGISTRY}/${application}:${BUILD_TIMESTAMP}.${version}.${BRANCH_NAME} ."
 	        sh "docker push ${DOCKER_REGISTRY}/${application}:${BUILD_TIMESTAMP}.${version}.${BRANCH_NAME}"
 	  }
