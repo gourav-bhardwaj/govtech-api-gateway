@@ -11,7 +11,7 @@ String branchName = "${env.BRANCH_NAME}"
 String HELM_FILENAME = "deploy-${branchName}"
 
 //Docker config env --------
-String DOCKER_REGISTRY = "govtech-api-gateway"
+String DOCKER_REGISTRY = "govkumardocker"
 String DOCKER_CREDENTIALS_ID = "USER_DOCKER_CREDENTIALS_ID"
 
 pipeline {
@@ -65,10 +65,7 @@ pipeline {
     stage("Docker build & push") {
       steps {
         script {
-          withCredentials([
-		  usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'USER', passwordVariable: 'PWD')
-			]) {
-		  sh "docker login -u $USER -p $PWD"
+          withDockerRegistry(credentialsId: "${DOCKER_CREDENTIALS_ID}", url: "https://index.docker.io") {
 	        sh "docker build -t ${DOCKER_REGISTRY}/${application}:${BUILD_TIMESTAMP}.${version}.${BRANCH_NAME} ."
 	        sh "docker push ${DOCKER_REGISTRY}/${application}:${BUILD_TIMESTAMP}.${version}.${BRANCH_NAME}"
 	  }
