@@ -47,7 +47,7 @@ pipeline {
            if (BRANCH_NAME == 'dev') {
            		NAMESPACE = "gv-tech"
 		        CHANNEL = "dev"
-		        KUBE_CONTEXT = "k8s-master"
+		        KUBE_CONTEXT = "kubernetes"
 		        KUBE_CREDENTIAL_ID = "GOVTECH_KUBE_CRED"
 		        NEW_BRANCH_NAME = readFile('test').trim()
 		        echo "********This is $NEW_BRANCH_NAME**************"
