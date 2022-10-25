@@ -66,7 +66,7 @@ pipeline {
       steps {
         script {
           withCredentials([
-			usernamePassword(credentialsId: 'DOCKER_CREDENTIALS_ID', usernameVariable: 'USER', passwordVariable: 'PWD')
+		  usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'USER', passwordVariable: 'PWD')
 			]) {
 		  sh "docker login -u $USER -p $PWD"
 	        sh "docker build -t ${DOCKER_REGISTRY}/${application}:${BUILD_TIMESTAMP}.${version}.${BRANCH_NAME} ."
