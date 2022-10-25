@@ -53,7 +53,7 @@ securityContext: {}
 service:
   type: NodePort
   port: 8990
-  nodePort: 31400
+  nodePort: 31800
 
 ingress:
   enabled: false
