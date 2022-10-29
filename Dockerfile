@@ -1,6 +1,6 @@
 FROM openjdk:8-jdk-alpine
 #---Created custom group and user so that no buddy can mess with container files----- 
-RUN groupadd -r govtech && useradd -r -g govtech govtech 
+RUN addgroup -r govtech && adduser -r -g govtech govtech 
 USER govtech
 #-------------------------------------------------------------------------------------
 ENV ROOTDIR /app
