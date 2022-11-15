@@ -71,12 +71,13 @@ pipeline {
     }
     stage("Docker build & push") {
       steps {
-        script {
-          withDockerRegistry(credentialsId: "${DOCKER_CREDENTIALS_ID}", url: "") {
-	        sh "docker build -t ${DOCKER_REGISTRY}/${application}:${BUILD_TIMESTAMP}.${version}.${BRANCH_NAME} ."
-	        sh "docker push ${DOCKER_REGISTRY}/${application}:${BUILD_TIMESTAMP}.${version}.${BRANCH_NAME}"
-	  }
-        }
+        container('docker') {
+                    sh "docker build -t ${DOCKER_REGISTRY}/${application}:$BUILD_NUMBER ."
+                    withCredentials([usernamePassword(credentialsId: 'DOCKER_CREDENTIALS_ID', passwordVariable: 'DOCKER_PASS', usernameVariable: 'DOCKER_USER')]) {
+                        sh "echo ${DOCKER_PASS} | docker login -u ${DOCKER_USER} --password-stdin DOCKER_CREDENTIALS_ID"
+                    }
+                    sh "docker push ${DOCKER_REGISTRY}/${application}:$BUILD_NUMBER"
+                }
       }
     }
     stage("Helm Deploy") {
