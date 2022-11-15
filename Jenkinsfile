@@ -15,29 +15,29 @@ String DOCKER_REGISTRY = "govkumardocker"
 String DOCKER_CREDENTIALS_ID = "USER_DOCKER_CREDENTIALS_ID"
 
 pipeline {
-  agent {
+    agent {
         kubernetes {
             yaml '''
-		apiVersion: v1
-		kind: Pod
-		spec:
-		  volumes:
-		    - name: docker-sock
-		      hostPath:
-			path: /var/run/docker.sock
-		  containers:
-		  - name: docker
-		    image: docker:latest
-		    command:
-		    - cat
-		    tty: true
-		    volumeMounts:
-		    - mountPath: /var/run/docker.sock
-		      name: docker-sock
-		'''
+apiVersion: v1
+kind: Pod
+spec:
+  volumes:
+    - name: docker-sock
+      hostPath:
+        path: /var/run/docker.sock
+  containers:
+  - name: docker
+    image: docker:latest
+    command:
+    - cat
+    tty: true
+    volumeMounts:
+    - mountPath: /var/run/docker.sock
+      name: docker-sock
+'''
             defaultContainer 'golang'
         }
-  }
+    }
   tools {
     gradle 'mygradle'
   }
