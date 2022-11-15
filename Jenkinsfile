@@ -15,6 +15,9 @@ String DOCKER_REGISTRY = "govkumardocker"
 String DOCKER_CREDENTIALS_ID = "USER_DOCKER_CREDENTIALS_ID"
 
 pipeline {
+    triggers {
+        pollSCM("*/5 * * * *")
+    }
     agent {
         kubernetes {
             yaml '''
